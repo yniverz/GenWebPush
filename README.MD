@@ -64,6 +64,10 @@ payload = {
 send_push_to_all_files(Path("."), payload)
 ```
 
+## Implementation in other projects
+GenWebPush is designed to be a drop-in helper for your own projects. Using the `genwebpush.send_simple_notifications(...)` function. This function looks for the JSON device files in the `notification_devices/` folder, and sends a notification to all devices in the folder.
+
+
 ---
 
 ## Configuration options
