@@ -30,7 +30,7 @@ def send_push_notification(device: PushDevice, payload: dict) -> None:
         }
     )
 
-def send_push_to_file(file_path: str, payload: dict) -> None:
+def send_push_to_file(file_path: pathlib.Path, payload: dict) -> None:
     """
     Send a push notification to the given device file.
     :param file_path: The path to the device file.
@@ -56,4 +56,39 @@ def send_push_to_all_files(base_path: pathlib.Path, payload: dict) -> None:
 
         send_push_to_file(device_file, payload)
 
+def generate_payload(title: str, body: str, icon: str = None, image: str = None, tag: str = None, renotify: bool = False, requireInteraction: bool = False, navigate: str = None) -> dict:
+    """
+    Generate a payload for the push notification.
+    :param title: The title of the notification.
+    :param body: The body of the notification.
+    :param icon: The icon of the notification (64x64).
+    :param image: The Hero image of the notification.
+    :param tag: Same tag will replace the previous notification.
+    :param renotify: Will show the notification even if it is already shown due to tag.
+    :param requireInteraction: Whether to require interaction or not.
+    :param navigate: The URL to navigate to when the notification is clicked.
+    :return: The payload for the push notification.
+    """
+    payload = {
+        "title": title,
+        "body": body,
+        "icon": icon,
+        "image": image,
+        "tag": tag,
+        "renotify": renotify,
+        "requireInteraction": requireInteraction,
+        "navigate": navigate
+    }
+    return {k: v for k, v in payload.items() if v not in [None, False, ""]}
 
+def send_simple_notifications(title: str, message: str):
+    """
+    Send a simple notification to all clients in the `notification_clients` directory.
+    """
+    send_push_to_all_files(
+        pathlib.Path("notification_clients"),
+        generate_payload(
+            title=title,
+            body=message,
+        )
+    )

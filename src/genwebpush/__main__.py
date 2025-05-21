@@ -74,8 +74,8 @@ def subscribe():
 
 def push_test(device: PushDevice):
     payload = {
-        "title": "Hello, world!",
-        "body":  "Your Safari push worked!!"
+        "title": "GenWebPush Test",
+        "body":  "Your push worked!!"
     }
     
     try:

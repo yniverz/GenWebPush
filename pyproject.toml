@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "genwebpush"
-version = "0.1.3"
+version = "0.1.10"
 dynamic = ["dependencies"]
 description = "A simple web push notification tool"
 readme = "README.md"
@@ -29,4 +29,4 @@ include-package-data = true          # respect MANIFEST.in + package-data
 dependencies = {file = ["requirements.txt"]}
 
 [tool.setuptools.package-data]
-"genwebpush" = ["assets/*.html", "assets/*.js"]
+"genwebpush" = ["assets/*.html", "assets/*.js", "assets/*.json"]

@@ -1,5 +1,5 @@
 {
-  "name":        "Push Notification",
+  "name":        "Push Notifications",
   "short_name":  "WebPush",
   "id":          "com.yniverz.webpush",
   "start_url":   "/",

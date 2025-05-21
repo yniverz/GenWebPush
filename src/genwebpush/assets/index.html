@@ -178,11 +178,6 @@
             document.addEventListener('DOMContentLoaded', function () {
                 const browser = detectBrowser();
                 expandFor(browser);
-
-                // Optionally, clicking big button closes the page if opened as PWA/pop-up
-                document.getElementById('main-action').addEventListener('click', function () {
-                    window.history.length > 1 ? window.history.back() : window.close();
-                });
             });
         })();
     </script>
@@ -224,7 +219,7 @@
 
                     const payload = {
                         ...sub.toJSON(),          // endpoint, keys, etc.
-                        device_name: "Test_Device"
+                        device_name: prompt("Enter a name for this device:"),
                     };
 
                     // Send the subscription to the server
