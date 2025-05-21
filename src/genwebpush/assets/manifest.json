@@ -1,0 +1,13 @@
+{
+  "name":        "Push Notification",
+  "short_name":  "WebPush",
+  "id":          "com.yniverz.webpush",
+  "start_url":   "/",
+  "scope":       "/",
+  "display":     "standalone",
+  "theme_color": "#525252",
+  "background_color": "#ffffff",
+  "icons": [
+    { "src": "https://static-00.iconduck.com/assets.00/notification-icon-512x512-0sa5r440.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

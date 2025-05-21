@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "genwebpush"
+version = "0.1.0"
+description = "A simple web push notification tool"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+authors = [{name = "yniverz", email = "-@-.-"}]
+dependencies = [
+  # e.g. "requests>=2.32"
+]
+classifiers = [
+  "License :: NCPULicense",
+  "Programming Language :: Python",
+]
+
+# ─── Optional console-script (pipx-style) ──────────────────────────────
+[project.scripts]
+packagename = "genwebpush.__main__:main"
+
+# ─── Tell setuptools where the code lives and what data to include ────
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true          # respect MANIFEST.in + package-data
+
+[tool.setuptools.package-data]
+"packagename" = ["assets/*.html", "assets/*.js"]

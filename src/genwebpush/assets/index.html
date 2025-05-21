@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Enable Notifications Help</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <style>
+        body {
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        details {
+            margin: 1rem 0;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        summary {
+            cursor: pointer;
+            padding: 1rem;
+            font-weight: 600;
+            list-style: none;
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .content {
+            padding: 1rem 1.5rem 1.5rem 1.5rem;
+            line-height: 1.6;
+        }
+
+        button#main-action {
+            display: block;
+            width: 100%;
+            max-width: 480px;
+            margin: 2rem auto 0 auto;
+            padding: 1rem 2rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 0.75rem;
+            background: #3b82f6;
+            color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.1s ease-in-out;
+        }
+
+        button#main-action:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>How to Enable Notifications</h1>
+
+    <details id="chrome-section">
+        <summary>Google Chrome (Windows/macOS/Linux)</summary>
+        <div class="content">
+            <ol>
+                <li>Click the <strong>lock&nbsp;icon</strong> next to the address bar.</li>
+                <li>Select <strong>Site settings</strong>.</li>
+                <li>Find <strong>Notifications</strong> and choose <em>Allow</em>.</li>
+                <li>If you see a warning about an insecure connection, click <strong>Advanced</strong> &raquo;
+                    <strong>Proceed</strong>. Because the page is served from your <em>local&nbsp;machine</em>, no data
+                    ever leaves your computer.
+                </li>
+            </ol>
+        </div>
+    </details>
+
+    <details id="firefox-section">
+        <summary>Mozilla Firefox (Windows/macOS/Linux)</summary>
+        <div class="content">
+            <ol>
+                <li>Click the <strong>shield&nbsp;icon</strong> to the left of the address bar and temporarily disable
+                    enhanced tracking protection for this site if prompted.</li>
+                <li>When the notification prompt appears, choose <em>Allow Notifications</em>.</li>
+                <li>If Firefox warns the page is insecure, click <strong>Advanced</strong> &raquo; <strong>Accept the
+                        Risk and Continue</strong>. The site is running locally and is safe.</li>
+            </ol>
+        </div>
+    </details>
+
+    <details id="safari-mac-section">
+        <summary>Safari (macOS)</summary>
+        <div class="content">
+            <ol>
+                <li>Open <strong>Safari ▸ Settings… ▸ Websites ▸ Notifications</strong>.</li>
+                <li>Locate this page in the list and set the permission to <em>Allow</em>.</li>
+                <li>Should Safari display a warning page, click <strong>Show Details</strong> and then
+                    <strong>Visit&nbsp;this&nbsp;Website</strong>. Because the server is on your computer, the
+                    connection is trustworthy.
+                </li>
+            </ol>
+        </div>
+    </details>
+
+    <details id="ios-section">
+        <summary>Safari on iOS / iPadOS</summary>
+        <div class="content">
+            <ol>
+                <li>Tap the <strong>share&nbsp;icon</strong> (📤) and choose <strong>Add to Home Screen</strong>.</li>
+                <li>Open the newly added app icon from your Home Screen.</li>
+                <li>When asked, tap <strong>Allow</strong> to grant notification permission.</li>
+                <li>If iOS displays “This connection is not secure”, tap <strong>Show Details</strong> &raquo;
+                    <strong>Visit Website</strong>. Local connections are safe.
+                </li>
+            </ol>
+        </div>
+    </details>
+
+    <details id="android-section">
+        <summary>Chrome on Android</summary>
+        <div class="content">
+            <ol>
+                <li>Tap the <strong>lock&nbsp;icon</strong> next to the address bar.</li>
+                <li>Select <strong>Site settings</strong>, then tap <strong>Notifications</strong> &raquo;
+                    <em>Allow</em>.
+                </li>
+                <li>If Chrome warns about an insecure site, tap <strong>Advanced</strong> &raquo; <strong>Proceed to
+                        site</strong>. Because the server is local, it is secure.</li>
+            </ol>
+        </div>
+    </details>
+
+    <button id="main-action">Got it &mdash; Activate Notifications</button>
+
+    <script>
+        (function () {
+            function detectBrowser() {
+                const ua = navigator.userAgent;
+                if (/iPhone|iPad|iPod/i.test(ua)) { return 'ios'; }
+                if (/Android/i.test(ua)) { return 'android'; }
+                if (/Edg/i.test(ua)) { return 'edge'; } // treat Edge like Chrome
+                if (/Chrome\/\d+/i.test(ua)) { return 'chrome'; }
+                if (/Firefox\/\d+/i.test(ua)) { return 'firefox'; }
+                if (/Safari\/\d+/i.test(ua)) { return 'safari-mac'; }
+                return 'chrome';
+            }
+
+            function expandFor(browser) {
+                const mapping = {
+                    'chrome': 'chrome-section',
+                    'edge': 'chrome-section',
+                    'firefox': 'firefox-section',
+                    'safari-mac': 'safari-mac-section',
+                    'ios': 'ios-section',
+                    'android': 'android-section'
+                };
+
+                const targetId = mapping[browser] || 'chrome-section';
+                document.querySelectorAll('details').forEach(det => {
+                    det.open = (det.id === targetId);
+                });
+                // scroll into view for better UX
+                const targetEl = document.getElementById(targetId);
+                if (targetEl) { targetEl.scrollIntoView({ behavior: 'smooth' }); }
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const browser = detectBrowser();
+                expandFor(browser);
+
+                // Optionally, clicking big button closes the page if opened as PWA/pop-up
+                document.getElementById('main-action').addEventListener('click', function () {
+                    window.history.length > 1 ? window.history.back() : window.close();
+                });
+            });
+        })();
+    </script>
+    <script type="module">
+        const VAPID_PUBLIC_KEY = "<--VAPID_PUBLIC_KEY-->";
+
+        const btn = document.getElementById("main-action");
+        btn.addEventListener("click", async () => {
+            try {
+                // 1  Register service-worker
+                const reg = await navigator.serviceWorker.register("/sw.js");
+
+                // 2  Request permission (user gesture)
+                const perm = await Notification.requestPermission();
+                if (perm !== "granted") throw new Error("User blocked notifications");
+
+                // 3  Subscribe to push notifications
+                await subscribe();
+                console.log("Subscribed!");
+
+            } catch (err) {
+                console.error(err);
+                alert("Failed: " + err.message);
+            }
+        });
+
+
+        function subscribe() {
+            navigator.serviceWorker.ready
+                .then(reg => {
+                    const options = {
+                        userVisibleOnly: true,
+                        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+                    };
+                    return reg.pushManager.subscribe(options);
+                })
+                .then(sub => {
+                    console.log("Subscribed!", sub);
+
+                    const payload = {
+                        ...sub.toJSON(),          // endpoint, keys, etc.
+                        device_name: "Test_Device"
+                    };
+
+                    // Send the subscription to the server
+                    return fetch("/subscribe", {
+                        method: "POST",
+                        body: JSON.stringify(payload),
+                        headers: { "Content-Type": "application/json" }
+                    });
+                })
+                .catch(err => console.error("Failed to subscribe", err));
+        }
+
+        function urlBase64ToUint8Array(b64) {
+            const pad = "=".repeat((4 - (b64.length % 4)) % 4);
+            const base64 = (b64 + pad).replace(/-/g, "+").replace(/_/g, "/");
+            const raw = atob(base64);
+            return Uint8Array.from([...raw].map(ch => ch.charCodeAt(0)));
+        }
+
+    </script>
+</body>
+
+</html>
