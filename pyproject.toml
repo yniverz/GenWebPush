@@ -20,7 +20,7 @@ classifiers = [
 
 # ─── Optional console-script (pipx-style) ──────────────────────────────
 [project.scripts]
-packagename = "genwebpush.__main__:main"
+genwebpush = "genwebpush.__main__:main"
 
 # ─── Tell setuptools where the code lives and what data to include ────
 [tool.setuptools]
@@ -28,4 +28,4 @@ package-dir = {"" = "src"}
 include-package-data = true          # respect MANIFEST.in + package-data
 
 [tool.setuptools.package-data]
-"packagename" = ["assets/*.html", "assets/*.js"]
+"genwebpush" = ["assets/*.html", "assets/*.js"]
