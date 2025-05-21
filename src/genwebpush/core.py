@@ -54,7 +54,12 @@ def send_push_to_all_files(base_path: pathlib.Path, payload: dict) -> None:
     for device_file in base_path.glob("*.json"):
         print(f"Sending push notification to {device_file}")
 
-        send_push_to_file(device_file, payload)
+        try:
+            send_push_to_file(device_file, payload)
+        except FileNotFoundError:
+            print(f"Device file {device_file} not found. Skipping.")
+        except json.JSONDecodeError:
+            print(f"Failed to decode JSON from {device_file}. Skipping.")
 
 def generate_payload(title: str, body: str, icon: str = None, image: str = None, tag: str = None, renotify: bool = False, requireInteraction: bool = False, navigate: str = None) -> dict:
     """
