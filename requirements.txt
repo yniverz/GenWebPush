@@ -1,0 +1,11 @@
+Flask>=3.1.1
+
+# Web framework dependencies
+pywebpush>=2.0.3
+py-vapid>=1.9.2
+cryptography>=45.0.2
+
+# Web-Push dependencies
+requests>=2.32.3
+python-dateutil>=2.9.0.post0
+six>=1.17.0

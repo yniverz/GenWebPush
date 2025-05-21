@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# build files/directories
+dist/
+*.egg-info
+
 # Apple specific files
 .DS_Store
 

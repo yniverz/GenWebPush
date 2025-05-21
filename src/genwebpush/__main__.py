@@ -2,9 +2,9 @@ from importlib.resources import files
 import argparse
 import time
 from flask import Flask, Response, request, abort, send_file
-from models import PushConfig, PushDevice, SubKey, Subscription
-from core import create_device_file, send_push_notification
 from pywebpush import WebPushException
+from .models import PushConfig, PushDevice, SubKey, Subscription
+from .core import create_device_file, send_push_notification
 
 parser = argparse.ArgumentParser(description="Push notification server")
 parser.add_argument("--mailto", type=str, required=True, help="The email address of the sender. (with or without 'mailto:')")

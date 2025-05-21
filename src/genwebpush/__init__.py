@@ -1,1 +1,1 @@
-from core import send_push_notification, send_push_to_file, send_push_to_all_files
+from .core import send_push_notification, send_push_to_file, send_push_to_all_files

@@ -15,8 +15,8 @@ GenWebPush spins up a one-file Flask server that:
 
 ## Features
 
-| ✔ | What you get |
-|---|--------------|
+| What you get |
+|-----------------|
 | **Automatic VAPID key generation** if none supplied |
 | **PWA assets** (manifest, service-worker, offline page) for installable testing |
 | **Browser-specific instructions** auto-expanded on load |
@@ -88,4 +88,4 @@ If you omit the VAPID keys, GenWebPush creates a fresh pair everytime it runs an
 
 ## License
 
-This project is distributed under the **NCPU License** – see [`LICENSE.md`](./LICENSE.md) for details.
+This project is distributed under the **NCPU License** – see [`LICENSE.md`](https://github.com/yniverz/GenWebPush/blob/main/LICENSE.md) for details.
