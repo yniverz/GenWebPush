@@ -3,8 +3,6 @@ import pathlib
 from pywebpush import webpush, WebPushException
 from models import PushDevice
 
-
-
 def create_device_file(subscription_device: PushDevice) -> str:
     """
     Create a device file for the given subscription payload.
