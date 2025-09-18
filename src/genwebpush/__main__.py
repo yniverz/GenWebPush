@@ -10,6 +10,7 @@ parser = argparse.ArgumentParser(description="Push notification server")
 parser.add_argument("--mailto", type=str, required=True, help="The email address of the sender. (with or without 'mailto:')")
 parser.add_argument("--public_key", type=str, help="The VAPID public key.")
 parser.add_argument("--private_key", type=str, help="The VAPID private key.")
+parser.add_argument("--port", type=int, default=5000, help="Port to run the server on (default: 5000)")
 args = parser.parse_args()
 config = PushConfig(
     subject_email=args.mailto,
@@ -88,7 +89,7 @@ def push_test(device: PushDevice):
 
 
 def main():
-    app.run(debug=False, host="0.0.0.0", port=5000, ssl_context="adhoc")
+    app.run(debug=False, host="0.0.0.0", port=args.port, ssl_context="adhoc")
 
 if __name__ == "__main__":
     main()

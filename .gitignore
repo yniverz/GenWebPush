@@ -7,6 +7,8 @@
 dist/
 *.egg-info
 
+.venv/
+
 # Apple specific files
 .DS_Store
 

@@ -2,7 +2,6 @@ import base64
 from dataclasses import dataclass
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ec
-from py_vapid import Vapid01
 
 @dataclass
 class PushConfig:
@@ -13,22 +12,31 @@ class PushConfig:
     def __init__(self, subject_email: str, public_key: str = None, private_key: str = None):
         """
         :param subject_email: The email address of the sender. (with or without "mailto:")
-        :param public_key: The VAPID public key.
-        :param private_key: The VAPID private key.
-        
+        :param public_key: The VAPID public key (base64url, no padding), if already available.
+        :param private_key: The VAPID private key (base64url, no padding), if already available.
+
         If public_key or private_key are not provided, they will both be generated.
         """
-
+        # Normalize subject
         self.subject_email = subject_email if subject_email.startswith("mailto:") else "mailto:" + subject_email
         self.public_key = public_key
         self.private_key = private_key
 
         if not self.public_key or not self.private_key:
-            vapid = Vapid01()
-            vapid.generate_keys()
+            # Generate a fresh P-256 (SECP256R1) keypair using modern cryptography
+            from cryptography.hazmat.primitives.asymmetric import ec
 
-            self.public_key = self.vapid_public_key_b64url(vapid.private_key)
-            self.private_key = self.vapid_private_key_b64url(vapid.private_key)
+            try:
+                priv_obj = ec.generate_private_key(ec.SECP256R1())  # no backend on modern cryptography
+            except TypeError:
+                # Extremely old cryptography fallback (kept for backward compatibility)
+                from cryptography.hazmat.backends import default_backend
+                priv_obj = ec.generate_private_key(ec.SECP256R1(), default_backend())
+
+            # Use your existing helpers that encode keys as base64url (no padding)
+            self.public_key = self.vapid_public_key_b64url(priv_obj)
+            self.private_key = self.vapid_private_key_b64url(priv_obj)
+
 
     def vapid_public_key_b64url(self, priv: "ec.EllipticCurvePrivateKey") -> str:
         raw_bytes = priv.public_key().public_bytes(
